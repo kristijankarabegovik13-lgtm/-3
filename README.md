@@ -1,10 +1,8 @@
-# Clean wedding invitation — Мирослав & Марија
+# Свадбена покана — Мирослав & Марија, нов дизајн (мобилно оптимизирана)
 
-- Clean / minimal design
-- Mobile-first responsive layout
-- Tested CSS rules for smaller screens (including ~320×568)
-- Song starts at 00:19 when the invitation opens
+Оваа верзија е оптимизирана за мобилни телефони, вклучувајќи помали екрани и safe-area на iPhone.
 
-## GitHub Pages
-Upload all files in this folder to the root of your repository. Then:
-Settings → Pages → Deploy from a branch → main → /(root)
+GitHub Pages:
+1. Upload-ирај ги сите фајлови во root на repository.
+2. `index.html` мора да биде директно во root.
+3. Settings → Pages → Deploy from branch → `main` / `(root)`.

@@ -1,73 +1,79 @@
-const page = document.getElementById('page');
-const openBtn = document.getElementById('openBtn');
-const replayBtn = document.getElementById('replayBtn');
-const musicBtn = document.getElementById('musicBtn');
-const song = document.getElementById('song');
+const scene = document.getElementById('scene');
+const openButton = document.getElementById('openButton');
+const replay = document.getElementById('replay');
+const bgMusic = document.getElementById('bgMusic');
+const musicToggle = document.getElementById('musicToggle');
 const card = document.getElementById('card');
-const START_AT = 19;
+const sparklesWrap = document.getElementById('sparkles');
 
-function syncViewport(){
-  const h = window.visualViewport ? window.visualViewport.height : window.innerHeight;
-  document.documentElement.style.setProperty('--app-h', `${h}px`);
-}
-syncViewport();
-window.addEventListener('resize', syncViewport);
-if(window.visualViewport){
-  window.visualViewport.addEventListener('resize', syncViewport);
-}
-
-function startMusic(){
-  try { song.currentTime = START_AT; } catch(e) {}
-  song.volume = 0.78;
-  song.muted = false;
-  const p = song.play();
-  if(p && typeof p.then === 'function'){
-    p.then(()=>{
-      musicBtn.hidden = false;
-      musicBtn.textContent = '🔊';
-      musicBtn.setAttribute('aria-label','Исклучи музика');
-    }).catch(()=>{
-      musicBtn.hidden = false;
-      musicBtn.textContent = '▶';
-      musicBtn.setAttribute('aria-label','Пушти музика');
-    });
+function createSparkles(){
+  for(let i=0;i<44;i++){
+    const s=document.createElement('span');
+    s.className='sparkle';
+    s.style.left=(Math.random()*100)+'%';
+    s.style.top=(Math.random()*100)+'%';
+    s.style.animationDelay=(Math.random()*4)+'s';
+    s.style.animationDuration=(2.6+Math.random()*3.8)+'s';
+    sparklesWrap.appendChild(s);
   }
 }
 
 function openInvitation(){
-  if(page.classList.contains('open')) return;
-  page.classList.add('open');
+  if(scene.classList.contains('open')) return;
+  scene.classList.add('open');
   card.setAttribute('aria-hidden','false');
-  startMusic();
-  setTimeout(()=>{ replayBtn.hidden = false; }, 900);
+
+  bgMusic.currentTime = 0;
+  bgMusic.volume = 0.8;
+  bgMusic.muted = false;
+  bgMusic.play().then(()=>{
+    musicToggle.hidden = false;
+    musicToggle.textContent = '🔊';
+    musicToggle.setAttribute('aria-label','Исклучи музика');
+  }).catch(()=>{
+    musicToggle.hidden = false;
+    musicToggle.textContent = '▶';
+    musicToggle.setAttribute('aria-label','Пушти музика');
+  });
+
+  setTimeout(()=>{ replay.hidden=false; }, 1450);
 }
 
 function resetInvitation(){
-  page.classList.remove('open');
+  scene.classList.remove('open');
+  replay.hidden = true;
+  musicToggle.hidden = true;
+  bgMusic.pause();
+  bgMusic.currentTime = 0;
+  bgMusic.muted = false;
   card.setAttribute('aria-hidden','true');
-  replayBtn.hidden = true;
-  musicBtn.hidden = true;
-  song.pause();
-  try { song.currentTime = START_AT; } catch(e) {}
-  song.muted = false;
 }
 
-openBtn.addEventListener('click', openInvitation);
-replayBtn.addEventListener('click', resetInvitation);
-musicBtn.addEventListener('click', ()=>{
-  if(song.paused){
-    if(song.currentTime < START_AT - .25) song.currentTime = START_AT;
-    song.play();
-    song.muted = false;
-    musicBtn.textContent = '🔊';
-    musicBtn.setAttribute('aria-label','Исклучи музика');
-  } else {
-    song.muted = !song.muted;
-    musicBtn.textContent = song.muted ? '🔇' : '🔊';
-    musicBtn.setAttribute('aria-label',song.muted ? 'Вклучи музика' : 'Исклучи музика');
+openButton.addEventListener('click', openInvitation);
+openButton.addEventListener('keydown', e=>{
+  if(e.key === 'Enter' || e.key === ' ') openInvitation();
+});
+replay.addEventListener('click', resetInvitation);
+musicToggle.addEventListener('click', ()=>{
+  if(bgMusic.paused){
+    bgMusic.play();
+    bgMusic.muted = false;
+    musicToggle.textContent='🔊';
+    musicToggle.setAttribute('aria-label','Исклучи музика');
+  }else{
+    bgMusic.muted = !bgMusic.muted;
+    musicToggle.textContent = bgMusic.muted ? '🔇' : '🔊';
+    musicToggle.setAttribute('aria-label', bgMusic.muted ? 'Вклучи музика' : 'Исклучи музика');
   }
 });
 
-song.addEventListener('ended',()=>{
-  song.currentTime = START_AT;
-});
+createSparkles();
+
+// Keep the invitation inside the actually visible phone viewport.
+// This avoids cropping caused by Safari/Chrome address bars on smaller phones.
+function syncRealViewportHeight(){
+  document.documentElement.style.setProperty('--real-vh', `${window.innerHeight * 0.01}px`);
+}
+syncRealViewportHeight();
+window.addEventListener('resize', syncRealViewportHeight, {passive:true});
+window.addEventListener('orientationchange', ()=>setTimeout(syncRealViewportHeight, 120), {passive:true});
