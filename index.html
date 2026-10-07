@@ -2,90 +2,72 @@
 <html lang="mk">
 <head>
   <meta charset="utf-8" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#102026" />
-  <title>Свадбена покана — Мирослав & Марија</title>
+  <meta name="theme-color" content="#eee9df" />
+  <title>Мирослав & Марија — Свадбена покана</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="clean-v2-style.css?v=20261007" />
 </head>
 <body>
-  <main class="scene" id="scene" aria-label="Интерактивна свадбена покана">
-    <div class="glow glow-1"></div>
-    <div class="glow glow-2"></div>
-    <div class="sparkles" id="sparkles" aria-hidden="true"></div>
+  <main class="page" id="page">
+    <div class="grain" aria-hidden="true"></div>
 
-    <section class="invitation-shell" aria-live="polite">
-      <div class="doors" id="doors">
-        <button class="open-button" id="openButton" type="button" aria-label="Отвори ја поканата">
-          <span class="button-script">Отвори</span>
-        </button>
-        <div class="door door-left">
-          <div class="door-ornament"></div>
-        </div>
-        <div class="door door-right">
-          <div class="door-ornament"></div>
-        </div>
-        <div class="monogram-wrap">
-          <div class="monogram-ring"></div>
-          <div class="monogram">ММ</div>
-          <p class="tap-text">Допрете за да ја отворите поканата</p>
-        </div>
+    <section class="invite-wrap" id="inviteWrap">
+      <div class="cover" id="cover">
+        <div class="cover-line cover-line-top"></div>
+        <p class="cover-kicker">Свадбена покана</p>
+        <div class="cover-monogram">М<span>&amp;</span>М</div>
+        <h1 class="cover-names">Мирослав <span>&amp;</span> Марија</h1>
+        <p class="cover-date">09 · 04 · 2027</p>
+        <button class="open-btn" id="openBtn" type="button">Отвори ја поканата</button>
+        <div class="cover-line cover-line-bottom"></div>
       </div>
 
-      <article class="invitation-card" id="card" aria-hidden="true">
-        <div class="card-frame"></div>
-        <div class="top-ornament">
-          <span></span>
-          <div class="initials">ММ</div>
-          <span></span>
-        </div>
-
-        <div class="content">
-          <p class="eyebrow">Свадбена покана</p>
-
+      <article class="card" id="card" aria-hidden="true">
+        <div class="frame"></div>
+        <div class="card-inner">
+          <div class="mini-mark">М &amp; М</div>
           <p class="intro">Со голема радост ве покануваме да бидете дел од еден од најубавите денови во нашиот живот.</p>
 
-          <h1>Мирослав <span>&amp;</span> Марија</h1>
+          <h2>Мирослав <span>&amp;</span> Марија</h2>
 
-          <p class="copy">ќе го кажат своето <strong>„Да“</strong> и би ни било чест овој посебен момент да го споделиме со вас.</p>
+          <p class="body-copy">ќе го кажат своето <strong>„Да“</strong> и би ни било чест овој посебен момент да го споделиме со вас.</p>
+          <p class="body-copy">Ве очекуваме да славиме заедно љубов, среќа и нов почеток.</p>
 
-          <p class="copy">Ве очекуваме да славиме заедно љубов, среќа и нов почеток.</p>
-
-          <div class="divider">
-            <span></span>
-            <i>✦</i>
-            <span></span>
-          </div>
+          <div class="rule"><span></span><i>◆</i><span></span></div>
 
           <div class="details">
-            <div class="detail-item">
-              <div class="label">Датум</div>
-              <div class="value">09.04.2027</div>
+            <div class="detail">
+              <span>ДАТУМ</span>
+              <strong>09.04.2027</strong>
             </div>
-            <div class="detail-item">
-              <div class="label">Време</div>
-              <div class="value">18:30 h</div>
+            <div class="detail">
+              <span>ВРЕМЕ</span>
+              <strong>18:30 h</strong>
             </div>
-            <div class="detail-item">
-              <div class="label">Место</div>
-              <div class="value">Ресторан Бисер</div>
+            <div class="detail detail-wide">
+              <span>МЕСТО</span>
+              <strong>Ресторан Бисер</strong>
             </div>
           </div>
 
-          <p class="closing">Со љубов,<br><strong>Мирослав &amp; Марија</strong></p>
+          <p class="closing">Со љубов,<br><b>Мирослав &amp; Марија</b></p>
         </div>
       </article>
     </section>
 
-    <button class="music-toggle" id="musicToggle" type="button" aria-label="Исклучи музика" title="Музика" hidden>🔊</button>
-    <button class="replay" id="replay" type="button" hidden>Повтори</button>
+    <button class="music-btn" id="musicBtn" type="button" hidden aria-label="Исклучи музика">🔊</button>
+    <button class="replay-btn" id="replayBtn" type="button" hidden>Повтори</button>
 
-    <audio id="bgMusic" preload="auto">
-      <source src="background-song.mp3" type="audio/mpeg">
+    <audio id="song" preload="auto">
+      <source src="clean-v2-song.mp3?v=20261007" type="audio/mpeg" />
     </audio>
   </main>
-  <script src="script.js"></script>
+  <script src="clean-v2-script.js?v=20261007"></script>
 </body>
 </html>

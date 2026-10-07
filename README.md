@@ -1,8 +1,10 @@
-# Свадбена покана — Мирослав & Марија, нов дизајн (мобилно оптимизирана)
+# Clean v2 — Мирослав & Марија
 
-Оваа верзија е оптимизирана за мобилни телефони, вклучувајќи помали екрани и safe-area на iPhone.
+Оваа верзија користи нови имиња за CSS/JS/MP3 и cache-busting за GitHub Pages.
 
-GitHub Pages:
-1. Upload-ирај ги сите фајлови во root на repository.
-2. `index.html` мора да биде директно во root.
-3. Settings → Pages → Deploy from branch → `main` / `(root)`.
+За да не се отвора старата верзија:
+1. Во GitHub repository избриши ги старите `index.html`, `style.css`, `script.js` и старите mp3 фајлови ако се од претходниот дизајн.
+2. Upload-ирај ги СИТЕ фајлови од овој ZIP.
+3. Commit changes.
+4. Почекај deployment да заврши во Actions/Pages.
+5. Отвори го Pages линкот со `?v=2` на крај ако browser-от уште кешира.
